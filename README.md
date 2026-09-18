@@ -1,19 +1,8 @@
 # Algoritmos de enjambre aplicados al aprendizaje automático
 
-**Universidad Nacional del Altiplano (UNAP)**  
-Facultad de Ingeniería Mecánica Eléctrica, Electrónica y de Sistemas (FIMEES)  
-Escuela Profesional de Ingeniería de Sistemas
+Cuatro ejemplos ejecutables: selección de características (ABC), ajuste de *C* y *γ* en un SVM (PSO), pesos de una red sin retropropagación (PSO) y clustering (PSO).
 
-| | |
-|---|---|
-| Curso | Aprendizaje de Máquina |
-| Ciclo / grupo | IX ciclo, grupo B |
-| Autor | Paolo Boris Luna Luque (código 227631) |
-| Docente | Mayenka Fernandez Chambi |
-| Repositorio | https://github.com/paololuna-luw/algoritmos-enjambre |
-| Video | https://youtu.be/quXcSntND30 |
-
-Actividad 03. Cuatro problemas de aprendizaje automático resueltos con colonia artificial de abejas (ABC) y enjambre de partículas (PSO). En cada ejemplo se recorre el mismo ciclo: representación, inicialización, aptitud, conducta, evolución y parada.
+Código, datos, figuras, cuadernos Colab y HTML del video. Exposición: [https://youtu.be/quXcSntND30](https://youtu.be/quXcSntND30).
 
 ---
 
@@ -115,7 +104,3 @@ K-Means gana en las nubes sintéticas. El ejercicio 4 documenta el ciclo, no un 
 6. Criterio de parada
 
 ABC opera en {0,1}^d (máscara de columnas). PSO opera en R^d: par (log C, log γ), vector de 91 pesos, o K centroides concatenados.
-
----
-
-Material elaborado para la Actividad 03 del curso Aprendizaje de Máquina, UNAP, septiembre de 2026.
