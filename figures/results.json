@@ -1,0 +1,76 @@
+{
+  "feature_selection": {
+    "dataset": "Breast Cancer Wisconsin",
+    "n_features_total": 30,
+    "n_features_abc": 13,
+    "features_abc": [
+      "mean texture",
+      "mean concavity",
+      "mean symmetry",
+      "mean fractal dimension",
+      "area error",
+      "smoothness error",
+      "fractal dimension error",
+      "worst radius",
+      "worst perimeter",
+      "worst smoothness",
+      "worst concavity",
+      "worst concave points",
+      "worst symmetry"
+    ],
+    "acc_all": 0.9754200315603825,
+    "acc_abc": 0.9806831894551192,
+    "acc_selectkbest": 0.9490578297595841,
+    "best_fitness": 0.9754831894551192,
+    "wine_n_total": 13,
+    "wine_n_abc": 6,
+    "wine_features": [
+      "alcohol",
+      "ash",
+      "alcalinity_of_ash",
+      "flavanoids",
+      "color_intensity",
+      "proline"
+    ],
+    "wine_acc_all": 0.9775894538606403,
+    "wine_acc_abc": 0.9832391713747647
+  },
+  "hyperparams": {
+    "dataset": "Wine",
+    "C": 92.30410353586481,
+    "gamma": 0.023737946594424887,
+    "acc_cv_pso": 0.991869918699187,
+    "acc_test_pso": 0.9814814814814815,
+    "acc_test_grid": 0.9629629629629629,
+    "acc_test_default": 0.9814814814814815,
+    "grid_best": {
+      "C": 56.23413251903491,
+      "gamma": 0.03162277660168379
+    },
+    "pso_evals": 110,
+    "grid_evals": 25
+  },
+  "nn": {
+    "architecture": "4-8-4-3",
+    "n_parameters": 91,
+    "ce_train": 0.13763837113237384,
+    "acc_train_pso": 0.9428571428571428,
+    "acc_test_pso": 0.9111111111111111,
+    "acc_test_backprop": 0.7555555555555555,
+    "xor_mse": 8.087595607555217e-05,
+    "xor_preds": [
+      6.144174602214718e-06,
+      0.9820137900379085,
+      0.9999999979065541,
+      6.144174602214718e-06
+    ]
+  },
+  "clustering": {
+    "blobs_inertia_pso": 2407.211827726611,
+    "blobs_inertia_kmeans": 503.60115223693833,
+    "blobs_sil_pso": 0.6097071352305868,
+    "blobs_sil_kmeans": 0.8242174765928254,
+    "wine2_sil_pso": 0.4839067514705431,
+    "wine2_sil_kmeans": 0.484095893654603
+  }
+}

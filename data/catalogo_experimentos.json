@@ -1,0 +1,86 @@
+[
+  {
+    "id": "exp01_abc_features",
+    "algoritmo": "ABC binario",
+    "tarea": "Feature selection",
+    "dataset": "Breast Cancer Wisconsin",
+    "archivo": "data/breast_cancer.csv",
+    "n_filas": 569,
+    "n_columnas_predictoras": 30,
+    "variable_objetivo": "target (0=malignant, 1=benign)",
+    "modelo_wrapper": "LogisticRegression + CV 3-fold",
+    "semilla": 42
+  },
+  {
+    "id": "exp01b_abc_features_wine",
+    "algoritmo": "ABC binario",
+    "tarea": "Feature selection (corroboracion)",
+    "dataset": "Wine",
+    "archivo": "data/wine.csv",
+    "n_filas": 178,
+    "n_columnas_predictoras": 13,
+    "variable_objetivo": "target (3 cultivares)",
+    "modelo_wrapper": "LogisticRegression + CV 3-fold",
+    "semilla": 7
+  },
+  {
+    "id": "exp02_pso_svm",
+    "algoritmo": "PSO",
+    "tarea": "Hyperparameter tuning",
+    "dataset": "Wine",
+    "archivo": "data/wine.csv",
+    "n_filas": 178,
+    "n_columnas_predictoras": 13,
+    "variable_objetivo": "target",
+    "modelo_wrapper": "SVM RBF (C, gamma)",
+    "semilla": 42
+  },
+  {
+    "id": "exp03_pso_mlp_iris",
+    "algoritmo": "PSO",
+    "tarea": "Entrenar MLP sin backpropagation",
+    "dataset": "Iris",
+    "archivo": "data/iris.csv",
+    "n_filas": 150,
+    "n_columnas_predictoras": 4,
+    "variable_objetivo": "target (3 especies)",
+    "modelo_wrapper": "MLP 4-8-4-3, 91 pesos",
+    "semilla": 42
+  },
+  {
+    "id": "exp03b_pso_mlp_xor",
+    "algoritmo": "PSO",
+    "tarea": "Entrenar MLP XOR (visual)",
+    "dataset": "XOR",
+    "archivo": "data/xor.csv",
+    "n_filas": 4,
+    "n_columnas_predictoras": 2,
+    "variable_objetivo": "y",
+    "modelo_wrapper": "MLP 2-4-1",
+    "semilla": 1
+  },
+  {
+    "id": "exp04_pso_clustering_blobs",
+    "algoritmo": "PSO",
+    "tarea": "Clustering",
+    "dataset": "make_blobs K=4",
+    "archivo": "data/blobs.csv",
+    "n_filas": 360,
+    "n_columnas_predictoras": 2,
+    "variable_objetivo": "cluster_real (solo referencia)",
+    "modelo_wrapper": "PSO centroides vs K-Means",
+    "semilla": 42
+  },
+  {
+    "id": "exp04b_pso_clustering_wine2d",
+    "algoritmo": "PSO",
+    "tarea": "Clustering 2D",
+    "dataset": "Wine (alcohol, malic_acid)",
+    "archivo": "data/wine.csv",
+    "n_filas": 178,
+    "n_columnas_predictoras": 2,
+    "variable_objetivo": "no supervisado",
+    "modelo_wrapper": "PSO centroides vs K-Means K=3",
+    "semilla": 3
+  }
+]
