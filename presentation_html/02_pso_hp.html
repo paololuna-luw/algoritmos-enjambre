@@ -1,0 +1,41 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>02 · Ajuste de hiperparámetros · PSO</title><link rel="stylesheet" href="estilo.css"></head><body><div class="wrap">
+<div class="top"><span>02 · Ajuste de hiperparámetros · PSO</span><span>Actividad 03 · Algoritmos de enjambre</span></div>
+<h1>Búsqueda de C y γ en un SVM de kernel RBF</h1>
+<p class="lead">Las 13 variables químicas del vino permanecen fijas. Lo que se optimiza son dos hiperparámetros del clasificador, no los descriptores del dato.</p>
+<div class="cycle"><div class="step" data-i="0"><small>01</small>Conjunto de datos</div><div class="step" data-i="1"><small>02</small>Clasificador</div><div class="step" data-i="2"><small>03</small>Hiperparámetros</div><div class="step" data-i="3"><small>04</small>PSO</div><div class="step" data-i="4"><small>05</small>Mapa</div><div class="step" data-i="5"><small>06</small>Test</div></div>
+<div class="say" id="say"></div>
+<div class="pills"><div class="pill">Datos: <b>Wine</b></div><div class="pill">Modelo: <b>SVM-RBF</b></div><div class="pill">Buscador: <b>PSO</b></div><div class="pill">C ≈ <b>92</b>, γ ≈ <b>0.024</b></div></div>
+<div class="grid3"><div class="card"><h3>Espacio (log C, log γ)</h3><img src="img/02_pso_heatmap.png" alt=""><p class="note">Tablero de hiperparámetros. No representa composición química.</p></div><div class="card"><h3>Convergencia</h3><img src="img/02_pso_convergence.png" alt=""><p class="note">El mejor error de validación se estabiliza desde la primera iteración.</p></div><div class="card"><h3>Exactitud en test</h3><img src="img/02_pso_compare.png" alt=""><p class="note">Tres configuraciones sobre la misma partición 70/30.</p></div></div>
+
+<div class="block">
+  <div class="kv"><h4>Datos, modelo, buscador</h4>
+  <ul>
+    <li>Wine: 178 observaciones, 13 descriptores químicos, 3 cepas.</li>
+    <li>SVM-RBF: clasificador. No busca columnas.</li>
+    <li>Hiperparámetros: C (penalización) y γ (ancho del kernel).</li>
+  </ul></div>
+  <div class="kv"><h4>Espacio de búsqueda</h4>
+  <p>La partícula es (log10 C, log10 γ) en [−2, 3] × [−4, 1]. El logaritmo iguala órdenes de magnitud. J = 1 − Acc_CV se minimiza: es el complemento del acierto, no una ley física.</p></div>
+  <div class="kv"><h4>Grid search</h4>
+  <p>Malla 5 × 5 = 25 evaluaciones. Solo pisa nodos. PSO camina en continuo; de ahí que estrella y rombo no coincidan.</p></div>
+</div>
+<table class="mini">
+<tr><th>Método</th><th>C</th><th>γ</th><th>Test</th></tr>
+<tr><td>SVM por defecto</td><td>1</td><td>automático</td><td>0.981</td></tr>
+<tr><td>Grid 25 eval.</td><td>nodo de malla</td><td>nodo de malla</td><td>0.963</td></tr>
+<tr><td>PSO</td><td>≈ 92.3</td><td>≈ 0.0237</td><td>0.981</td></tr>
+</table>
+
+<div class="call">Conviene distinguir de forma explícita: descriptor del vino frente a hiperparámetro del SVM.</div>
+<div class="nav"><a href="index.html">Inicio</a><a href="01_abc.html">01 Selección de variables</a><a href="03_nn.html">03 Entrenamiento de red</a></div>
+</div>
+<script>
+const L=["Wine suministra las observaciones. Alcohol y acidez no se seleccionan en este ejercicio.","Máquina de vectores de soporte con kernel radial. Es el modelo, no el buscador.","C regula la penalización del error. γ regula el alcance del kernel. Ambos son ajustes del aparato.","Cada partícula es un punto (log10 C, log10 γ). La actualización combina inercia, mejor personal y mejor global.","El color representa 1 − accuracy. Amarillo indica menor error. La estrella es PSO; el rombo, la mejor celda del grid.","Por defecto 0.981; grid 0.963; PSO 0.981. El método empata al valor por defecto y supera a la malla de 25 nodos."];
+document.querySelectorAll('.step').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('say').textContent=L[+el.dataset.i];
+});
+document.querySelector('.step').click();
+</script></body></html>

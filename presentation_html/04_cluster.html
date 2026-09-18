@@ -1,0 +1,36 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>04 · Agrupamiento · PSO</title><link rel="stylesheet" href="estilo.css"></head><body><div class="wrap">
+<div class="top"><span>04 · Agrupamiento · PSO</span><span>Actividad 03 · Algoritmos de enjambre</span></div>
+<h1>Estimación de centroides por enjambre de partículas</h1>
+<p class="lead">El agrupamiento se escribe como minimización de la inercia. K-Means constituye el especialista de esa función y se reporta como baseline.</p>
+<div class="cycle"><div class="step" data-i="0"><small>01</small>Objeto</div><div class="step" data-i="1"><small>02</small>Representación</div><div class="step" data-i="2"><small>03</small>Aptitud</div><div class="step" data-i="3"><small>04</small>K-Means</div><div class="step" data-i="4"><small>05</small>Resultados</div><div class="step" data-i="5"><small>06</small>Interpretación</div></div>
+<div class="say" id="say"></div>
+<div class="pills"><div class="pill">Silueta PSO <b>0.610</b></div><div class="pill">K-Means <b>0.824</b></div><div class="pill">Wine 2D, empate aproximado</div></div>
+<div class="grid3"><div class="card"><h3>Blobs, K = 4</h3><img src="img/04_clusters.png" alt=""><p class="note">Izquierda: asignación PSO. Derecha: K-Means. Las cruces marcan centros.</p></div><div class="card"><h3>Inercia</h3><img src="img/04_cluster_convergence.png" alt=""><p class="note">Descenso de la función objetivo a lo largo de 22 iteraciones.</p></div><div class="card"><h3>Wine, dos variables</h3><img src="img/04_wine_clusters.png" alt=""><p class="note">Proyección únicamente visual; K = 3.</p></div></div>
+
+<div class="block">
+  <div class="kv"><h4>Formulación</h4>
+  <p>Partícula = concatenación de K centroides. En blobs, K = 4 y d = 2, de modo que el vector tiene longitud 8. La aptitud es la inercia.</p></div>
+  <div class="kv"><h4>Baseline</h4>
+  <p>K-Means con n_init = 10 está diseñado para esta función objetivo. Un PSO genérico, con presupuesto limitado, no tiene por qué superarlo.</p></div>
+  <div class="kv"><h4>Lectura del resultado</h4>
+  <p>El ejercicio justifica el ciclo del enjambre en clustering, no un recuento favorable. Una mejora natural es hibridar con un paso de K-Means.</p></div>
+</div>
+<table class="mini">
+<tr><th>Problema</th><th>PSO</th><th>K-Means</th></tr>
+<tr><td>Blobs, silueta</td><td>0.610</td><td>0.824</td></tr>
+<tr><td>Wine 2 variables, silueta</td><td>≈ 0.484</td><td>≈ 0.484</td></tr>
+</table>
+
+<div class="call">Una extensión razonable es reiniciar centros vacíos o aplicar un paso de K-Means sobre la mejor partícula.</div>
+<div class="nav"><a href="index.html">Inicio</a><a href="03_nn.html">03 Red neuronal</a></div>
+</div>
+<script>
+const L=["Ubicar K centros de modo que la suma de distancias al cuadrado sea mínima.","Concatenación de los K centroides. En el plano, K = 4 implica un vector de longitud 8.","Inercia: distancia de cada punto al centro más próximo.","Algoritmo específico para esta función. No pertenece a la familia de enjambres.","Silueta en blobs: PSO 0.610, K-Means 0.824. En Wine reducido a dos variables, los valores se igualan.","El ejemplo documenta el ciclo. No se presenta como victoria sobre K-Means."];
+document.querySelectorAll('.step').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('say').textContent=L[+el.dataset.i];
+});
+document.querySelector('.step').click();
+</script></body></html>

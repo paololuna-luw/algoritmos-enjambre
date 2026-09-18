@@ -1,0 +1,37 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 · Feature selection · ABC</title><link rel="stylesheet" href="estilo.css"></head><body><div class="wrap">
+<div class="top"><span>01 · Feature selection · ABC</span><span>Actividad 03 · Algoritmos de enjambre</span></div>
+<h1>Selección de características mediante colonia artificial de abejas</h1>
+<p class="lead">El primer problema consiste en elegir un subconjunto de variables para un clasificador. El espacio es combinatorio. ABC explora máscaras binarias; SelectKBest aporta un control univariado a igual cardinalidad.</p>
+<div class="cycle"><div class="step" data-i="0"><small>01</small>Objeto</div><div class="step" data-i="1"><small>02</small>Representación</div><div class="step" data-i="2"><small>03</small>Aptitud</div><div class="step" data-i="3"><small>04</small>Conducta</div><div class="step" data-i="4"><small>05</small>Control</div><div class="step" data-i="5"><small>06</small>Resultado</div></div>
+<div class="say" id="say"></div>
+<div class="pills"><div class="pill">30 → <b>13</b> variables</div><div class="pill">ABC <b>0.981</b></div><div class="pill">SelectKBest <b>0.949</b></div><div class="pill">Wine 13 → <b>6</b></div></div>
+<div class="grid2"><div class="card"><h3>Máscara obtenida</h3><img src="img/01_abc_features.png" alt=""><p class="note">Bits activos al término de ocho ciclos.</p></div><div class="card"><h3>Comparación a igual k</h3><img src="img/01_abc_compare.png" alt=""><p class="note">El filtro univariado no replica el subconjunto del wrapper.</p></div></div>
+
+<div class="block">
+  <div class="kv"><h4>Representación</h4>
+  <p>Vector binario de dimensión d. El bit j indica si la variable j entra al clasificador. Wrapper: cada evaluación reentrena una regresión logística con validación cruzada estratificada de 3 pliegues.</p></div>
+  <div class="kv"><h4>Función de aptitud</h4>
+  <p>f = Acc_CV − λ · (k / d), con λ = 0.012. El segundo término evita la solución trivial de usar las 30 variables.</p></div>
+  <div class="kv"><h4>Por qué SelectKBest</h4>
+  <p>Baseline univariado a cardinalidad emparejada (k = 13). Contrasta relevancia individual frente a relevancia conjunta. No es una muestra aleatoria.</p></div>
+</div>
+<table class="mini">
+<tr><th>Método</th><th>Variables</th><th>Accuracy CV</th></tr>
+<tr><td>Todas</td><td>30</td><td>0.975</td></tr>
+<tr><td>ABC</td><td>13</td><td>0.981</td></tr>
+<tr><td>SelectKBest (ANOVA)</td><td>13</td><td>0.949</td></tr>
+</table>
+
+<div class="call">El valor del control es aislar el criterio de selección. A igual número de variables, el ranking individual no preserva la accuracy.</div>
+<div class="nav"><a href="index.html">Inicio</a><a href="02_pso_hp.html">02 Ajuste de hiperparámetros</a></div>
+</div>
+<script>
+const L=["ABC determina qué columnas entran al modelo. No ajusta hiperparámetros.","Máscara binaria. El valor 1 incorpora la variable; el 0 la descarta.","Exactitud en validación cruzada menos una penalización proporcional al número de variables usadas.","Abeja empleada explota un vecino. Observadora elige fuentes según su aptitud. Exploradora reemplaza fuentes estancadas.","SelectKBest ordena por relevancia individual (ANOVA) y retiene k = 13. No es una selección aleatoria.","Breast Cancer: 30 a 13 variables. Accuracy 0.975 a 0.981. SelectKBest, con las mismas 13, obtiene 0.949."];
+document.querySelectorAll('.step').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('say').textContent=L[+el.dataset.i];
+});
+document.querySelector('.step').click();
+</script></body></html>

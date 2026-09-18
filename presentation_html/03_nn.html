@@ -1,0 +1,37 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>03 · Entrenamiento de red · PSO</title><link rel="stylesheet" href="estilo.css"></head><body><div class="wrap">
+<div class="top"><span>03 · Entrenamiento de red · PSO</span><span>Actividad 03 · Algoritmos de enjambre</span></div>
+<h1>Ajuste de pesos de una red de tres capas sin retropropagación</h1>
+<p class="lead">El entrenamiento se formula como optimización directa del vector de parámetros. No se calcula el gradiente analítico.</p>
+<div class="cycle"><div class="step" data-i="0"><small>01</small>Arquitectura</div><div class="step" data-i="1"><small>02</small>Partícula</div><div class="step" data-i="2"><small>03</small>Aptitud</div><div class="step" data-i="3"><small>04</small>XOR</div><div class="step" data-i="4"><small>05</small>Referencia</div><div class="step" data-i="5"><small>06</small>Límite</div></div>
+<div class="say" id="say"></div>
+<div class="pills"><div class="pill">91 parámetros</div><div class="pill">PSO test <b>0.911</b></div><div class="pill">Adam <b>0.756</b></div></div>
+<div class="grid3"><div class="card"><h3>Frontera XOR</h3><img src="img/03_xor_boundary.png" alt=""><p class="note">MLP 2-4-1 entrenada únicamente con PSO.</p></div><div class="card"><h3>Evolución del costo</h3><img src="img/03_nn_convergence.png" alt=""><p class="note">Entropía cruzada de entrenamiento por iteración.</p></div><div class="card"><h3>Iris, conjunto de prueba</h3><img src="img/03_nn_compare.png" alt=""><p class="note">Comparación con un MLP de sklearn (solver Adam).</p></div></div>
+
+<div class="block">
+  <div class="kv"><h4>Arquitectura</h4>
+  <p>MLP 4-8-4-3 sobre Iris. Parámetros: 4×8+8 + 8×4+4 + 4×3+3 = 91. Activación ReLU y salida softmax. XOR auxiliar: 2-4-1.</p></div>
+  <div class="kv"><h4>Optimización</h4>
+  <p>La partícula es el vector de pesos y sesgos. La aptitud es la entropía cruzada en entrenamiento. Solo hay pase hacia adelante.</p></div>
+  <div class="kv"><h4>Alcance</h4>
+  <p>El resultado no pretende sustituir a Adam en redes de gran escala. Muestra que el entrenamiento es un problema de optimización y que, en 91 dimensiones, el enjambre es suficiente.</p></div>
+</div>
+<table class="mini">
+<tr><th>Método</th><th>Conjunto</th><th>Métrica</th></tr>
+<tr><td>PSO</td><td>Iris test</td><td>0.911</td></tr>
+<tr><td>Adam, 400 épocas</td><td>Iris test</td><td>0.756</td></tr>
+<tr><td>PSO</td><td>XOR</td><td>MSE ≈ 8×10<sup>−5</sup></td></tr>
+</table>
+
+<div class="call">La retropropagación es un procedimiento para obtener derivadas. No define, por sí sola, el aprendizaje.</div>
+<div class="nav"><a href="index.html">Inicio</a><a href="02_pso_hp.html">02 Hiperparámetros</a><a href="04_cluster.html">04 Agrupamiento</a></div>
+</div>
+<script>
+const L=["Iris, perceptrón 4-8-4-3. El vector de decisión tiene 91 componentes.","Concatenación de matrices de peso y vectores de sesgo. Cada individuo es una red completa.","Entropía cruzada sobre el conjunto de entrenamiento. Únicamente evaluación hacia adelante.","Problema auxiliar de verificación. La salida esperada es (0, 1, 1, 0).","En test, PSO obtiene 0.911. Adam, con 400 épocas, 0.756 y sin convergencia declarada por el solver.","El procedimiento no escala a redes de cientos de miles de pesos. En 91 dimensiones es viable."];
+document.querySelectorAll('.step').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('say').textContent=L[+el.dataset.i];
+});
+document.querySelector('.step').click();
+</script></body></html>
